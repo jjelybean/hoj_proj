@@ -8,10 +8,10 @@ app.use(express.json());
 
 // Connection
 const db = mysql.createConnection({
-  host: process.env.db.render.com,    
-  user: process.env.hoj_user,    
-  password: process.env.OCPdataBase6300,  
-  database: process.env.hoj-app, 
+  host: process.env.DB_HOST,       
+  user: process.env.DB_USER,       
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
