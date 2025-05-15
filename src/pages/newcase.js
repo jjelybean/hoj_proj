@@ -30,20 +30,24 @@ const Newcase = () => {
     // Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const cleanedData = Object.fromEntries(
             Object.entries(formData).map(([key, value]) => [key, value || null])
         );
-
+    
         try {
-            await axios.post("http://localhost:5000/add-case", cleanedData);
+           
+            const apiUrl = process.env.REACT_APP_API_URL;
+    
+            await axios.post(`${apiUrl}/add-case`, cleanedData);
+    
             alert("Case added successfully!");
             navigate("/caselist");
         } catch (error) {
             console.error("Error adding case:", error);
             alert("Failed to add case. Please try again.");
         }
-    };
+    };    
 
     return (
         <div>
@@ -126,6 +130,7 @@ const Newcase = () => {
                         <span className="input-group-text">Remarks</span>
                         <input type="text" name="REMARKS" value={formData.REMARKS} onChange={handleChange} className="form-control" placeholder="Remarks" />
                     </div>
+                
 
                     <div className="input-group mb-3">
                         <span className="input-group-text">Penalty</span>

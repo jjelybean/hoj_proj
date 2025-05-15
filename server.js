@@ -8,10 +8,10 @@ app.use(express.json());
 
 // Connection
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,       
-  user: process.env.DB_USER,       
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "localhost",       
+  user: "root",       
+  password: "",
+  database: "hoj-app",
 });
 
 db.connect((err) => {
@@ -71,7 +71,7 @@ app.post("/add-case", (req, res) => {
       INDEX_CARDS
       
   } = req.body;
-
+                                                                                                                                                                                                                        
   const sql = `INSERT INTO cases (DOCKET_NO, DATE_FILED, COMPLAINANT, RESPONDENT, OFFENSE, DATE_RESOLVED, RESOLVING_PROSECUTOR, CRIM_CASE_NO, BRANCH, DATEFILED_IN_COURT, REMARKS, PENALTY, INDEX_CARDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   db.query(sql, [DOCKET_NO, DATE_FILED, COMPLAINANT, RESPONDENT, OFFENSE, DATE_RESOLVED, RESOLVING_PROSECUTOR, CRIM_CASE_NO, BRANCH, DATEFILED_IN_COURT, REMARKS, PENALTY, INDEX_CARDS], (err, result) => {
@@ -191,8 +191,16 @@ app.delete("/delete-case", (req, res) => {
   });
 });
 
+const PORT = process.env.PORT || 5000;
 
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
 });
+
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// Trigger redeploy
+
