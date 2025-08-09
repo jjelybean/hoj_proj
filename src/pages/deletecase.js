@@ -10,9 +10,7 @@ const Deletecase = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [selectedCase, setSelectedCase] = useState(null); 
- 
-
-    
+     
     const handleChange = (e) => {
       const { name, value } = e.target;
       setSearchQuery((prevQuery) => ({
